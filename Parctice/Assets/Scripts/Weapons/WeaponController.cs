@@ -18,6 +18,7 @@ public class WeaponController : MonoBehaviour
     private WeaponManager ammoInv;
     private bool reloading;
 
+    public LayerMask layerMask;
     bool canShoot;
 
     private void Start() {
@@ -85,7 +86,7 @@ public class WeaponController : MonoBehaviour
         StartCoroutine(MuzzleFlash());
         RecoilAnim();
         RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 100f))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 100f, ~layerMask))
         {
             Debug.Log(hit.transform.name);
 

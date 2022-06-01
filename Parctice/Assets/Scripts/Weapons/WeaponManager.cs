@@ -17,7 +17,7 @@ public class WeaponManager : MonoBehaviour
         ammo.Add("Rifle", 50);
         ammo.Add("Shotgun", 10);
         ammo.Add("Rocket", 100);
-        ammo.Add("Sniper", 0);
+        ammo.Add("Sniper", 10);
     }
 
     void Update()
