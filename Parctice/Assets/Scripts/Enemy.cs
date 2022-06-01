@@ -10,15 +10,15 @@ public class Enemy : MonoBehaviour
     public int damage = 20;
     public NavMeshAgent agent;
     
-    public Transform player;
+    Transform player;
     
     public LayerMask playerLayerMask;
     public float attackCooldown;
     bool moving;
     bool attacking;
 
-    void Awake() {
-
+    void Start() {
+        player = GameObject.Find("PlayerPrefab").transform.GetChild(0);
     }
 
     void Update()
