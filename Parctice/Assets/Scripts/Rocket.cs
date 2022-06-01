@@ -8,6 +8,7 @@ public class Rocket : MonoBehaviour
     public int rocketSpeed;
     
     public float exploadRadius;
+    public GameObject explodeParticle;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -24,6 +25,7 @@ public class Rocket : MonoBehaviour
                 Enemy target = hit.transform.GetComponent<Enemy>();
                 if (target != null) target.TakeDamage(100);
             }
+            Instantiate(explodeParticle,transform.position - new Vector3(0,1f,0), transform.rotation);
             Destroy(gameObject);
         }
         
