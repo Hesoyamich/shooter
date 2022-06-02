@@ -114,8 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   damage: 20
+  moneyForKill: 100
   agent: {fileID: 3320101410589248594}
-  player: {fileID: 0}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 1024

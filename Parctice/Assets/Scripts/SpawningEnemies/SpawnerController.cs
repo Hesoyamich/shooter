@@ -47,7 +47,11 @@ public class SpawnerController : MonoBehaviour
             StartCoroutine(EnemySpawner());
 
         if (killedEnemies == enemiesInWave)
-            inWave = false;
+            {
+                if (inWave) currentWave++;
+                inWave = false; 
+                
+            }
 
     }
 
@@ -74,7 +78,7 @@ public class SpawnerController : MonoBehaviour
     public void AddKilledEnemy()
     {
         killedEnemies++;
-        Debug.Log(killedEnemies);
+        // Debug.Log(killedEnemies);
     }
 
     IEnumerator StartWaveCooldown()
@@ -93,7 +97,6 @@ public class SpawnerController : MonoBehaviour
         enemiesInWave *= 2;
         killedEnemies = 0;
         timeToWave = waveCooldown;
-        currentWave++;
         inWave = true;
     }
 }

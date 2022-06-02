@@ -58,4 +58,39 @@ public class WeaponManager : MonoBehaviour
         weapons[number].SetActive(true);
         currentWeapon = number;
     }
+
+    public bool GetWeaponActive(string weapon)
+    {
+        switch (weapon)
+        {
+            case "Rifle":
+                return hasRifle;
+            case "Shotgun":
+                return hasShotgun;
+            case "Rocket":
+                return hasRocketLauncher;
+            case "Sniper":
+                return hasSniperRifle;
+            default: return false;
+        }
+    }
+
+    public void SetWeaponActive(string weapon)
+    {
+        switch (weapon)
+        {
+            case "Rifle":
+                hasRifle = true;
+                break;
+            case "Shotgun":
+                hasShotgun = true;
+                break;
+            case "Rocket":
+                hasRocketLauncher = true;
+                break;
+            case "Sniper":
+                hasSniperRifle = true;
+                break;
+        }
+    }
 }

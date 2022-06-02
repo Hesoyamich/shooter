@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 
     public int hp = 100;
     public int damage = 20;
+    public int moneyForKill = 100;
     public NavMeshAgent agent;
     
     Transform player;
@@ -64,6 +65,8 @@ public class Enemy : MonoBehaviour
     {
         spawnContoll.MinusCurEnemy();
         spawnContoll.AddKilledEnemy();
+        player.gameObject.GetComponent<PlayerMovement>().money += moneyForKill;
+        Debug.Log(player.gameObject.GetComponent<PlayerMovement>().money);
         Destroy(gameObject);
     }
 }

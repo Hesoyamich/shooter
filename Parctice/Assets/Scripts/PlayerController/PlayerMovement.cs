@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public int money;
+
     [Header("Movement")]
     private float moveSpeed;
     public float walkSpeed;
