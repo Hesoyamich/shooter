@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class WeaponManager : MonoBehaviour
     public Dictionary<string, int> ammo = new Dictionary<string, int>();
     public bool hasPistol, hasRifle, hasShotgun, hasRocketLauncher, hasSniperRifle;
     public GameObject[] weapons = new GameObject[5];
+
+    //
+    public GameObject magzAmmo, maxAmmo, invAmmo;
+    //
     
     private int currentWeapon = 0;
 
@@ -18,6 +23,9 @@ public class WeaponManager : MonoBehaviour
         ammo.Add("Shotgun", 10);
         ammo.Add("Rocket", 100);
         ammo.Add("Sniper", 10);
+
+        //
+        AmmoValue(weapons[currentWeapon]);
     }
 
     void Update()
@@ -74,6 +82,35 @@ public class WeaponManager : MonoBehaviour
             default: return false;
         }
     }
+
+    //
+    void AmmoValue(GameObject weapon)
+    {
+        if (currentWeapon != 3)
+        {
+            WeaponController curWeap = weapon.GetComponent<WeaponController>();
+            magzAmmo.GetComponent<TextMeshProUGUI>().text = "" + curWeap.ammo;
+            maxAmmo.GetComponent<TextMeshProUGUI>().text = "" + curWeap.magAmmo;
+            if (!curWeap.infiniteAmmo)
+            {
+                invAmmo.GetComponent<TextMeshProUGUI>().text = "" + curWeap.ammoType + " " + curWeap.ammoInv.ammo[curWeap.ammoType];
+            }
+            else
+            {
+                invAmmo.GetComponent<TextMeshProUGUI>().text = "inf";
+            }
+        }
+
+        else if (currentWeapon == 3)
+        {
+            RocketLauncherController curWeap = weapon.GetComponent<RocketLauncherController>();
+            magzAmmo.GetComponent<TextMeshProUGUI>().text = "";
+            maxAmmo.GetComponent<TextMeshProUGUI>().text = "";
+            invAmmo.GetComponent<TextMeshProUGUI>().text = "" + ammo["Rocket"];
+        }
+
+    }
+    //
 
     public void SetWeaponActive(string weapon)
     {

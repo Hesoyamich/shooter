@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,6 +33,13 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
+
+    //Арс
+    public GameObject death_panel;
+    public GameObject HP_UI;
+    public GameObject Ammo_UI;
+    
+    //
 
     public int hp;
     int maxhp;
@@ -65,6 +74,10 @@ public class PlayerMovement : MonoBehaviour
             SpeedControl();
             StateHandler();
         }
+
+        //
+        HP_UI.GetComponent<Slider>().value = hp;
+        //
        
 
         if (hp <= 0) KillPlayer();
@@ -74,6 +87,20 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = groundDrag;
         else
             rb.drag = 0;
+
+         //Арс
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        //
     }
 
     void FixedUpdate()
@@ -201,6 +228,7 @@ public class PlayerMovement : MonoBehaviour
     void KillPlayer()
     {
         isAlive = false;
+        death_panel.SetActive(true);
     }
 
     public int GetMaxHp()

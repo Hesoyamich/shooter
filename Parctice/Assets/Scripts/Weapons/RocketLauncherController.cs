@@ -11,7 +11,7 @@ public class RocketLauncherController : MonoBehaviour
     bool canShoot;
     bool reloading;
     Vector3 startPos;
-    private WeaponManager ammoInv;
+    public WeaponManager ammoInv;
 
 
     void Start()

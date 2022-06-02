@@ -7,7 +7,7 @@ public class WeaponController : MonoBehaviour
     [Header("Gun Settings")]
     public float fireRate = 0.1f;
     public int ammo = 30;
-    private int magAmmo;
+    public int magAmmo;
     public GameObject muzzleFlash;
     public int damage = 40;
     public float reloadTime = 1.5f;
@@ -15,7 +15,7 @@ public class WeaponController : MonoBehaviour
     public string ammoType;
     Vector3 startPos;
     private Transform cam;
-    private WeaponManager ammoInv;
+    public WeaponManager ammoInv;
     private bool reloading;
 
     public LayerMask layerMask;

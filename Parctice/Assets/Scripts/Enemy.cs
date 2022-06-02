@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
         spawnContoll.MinusCurEnemy();
         spawnContoll.AddKilledEnemy();
         player.gameObject.GetComponent<PlayerMovement>().money += moneyForKill;
-        Debug.Log(player.gameObject.GetComponent<PlayerMovement>().money);
+        // Debug.Log(player.gameObject.GetComponent<PlayerMovement>().money);
         Destroy(gameObject);
     }
 }
