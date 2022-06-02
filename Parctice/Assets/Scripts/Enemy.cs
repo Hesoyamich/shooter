@@ -19,15 +19,21 @@ public class Enemy : MonoBehaviour
     bool moving;
     bool attacking;
 
+    public Transform weapon;
+    Vector3 weaponPos;
+
     void Start() {
         player = GameObject.Find("PlayerPrefab").transform.GetChild(0);
         spawnContoll = GameObject.Find("GameController").GetComponent<SpawnerController>();
+        weaponPos = weapon.localPosition;
     }
 
     void Update()
     {
+        weapon.localPosition = weaponPos;
         if (Vector3.Distance(player.position, transform.position) > 2f)
             moving = true;
+        
         else
         {
             moving = false;
@@ -56,7 +62,9 @@ public class Enemy : MonoBehaviour
         attacking = true;
         player.gameObject.GetComponent<PlayerMovement>().GetDamage(damage);
         Debug.Log(player.gameObject.GetComponent<PlayerMovement>().hp);
+        weaponPos += new Vector3(0,0,1);
         yield return new WaitForSeconds(attackCooldown);
+        weaponPos -= new Vector3(0,0,1);
         attacking = false;
         
     }
