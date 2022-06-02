@@ -15,7 +15,9 @@ public class SpawnerController : MonoBehaviour
     int currentEnemies;
     public int waveCooldown;
     bool enemyIsSpawning;
-
+    
+    public int maxWaves;
+    int currentWave;
     bool inWave;
     int timeToWave;
     bool waveTimer;
@@ -25,6 +27,7 @@ public class SpawnerController : MonoBehaviour
         spawners = new Transform[spawner.childCount];
         int i = 0;
         timeToWave = waveCooldown;
+        currentWave = 1;
         inWave = true;
 
         foreach (Transform spawn in spawner)
@@ -37,7 +40,7 @@ public class SpawnerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!inWave && !waveTimer)
+        if (!inWave && !waveTimer && currentWave <= maxWaves)
             StartCoroutine(StartWaveCooldown());
 
         if (maxEnemies > currentEnemies && !enemyIsSpawning && enemiesInWave - killedEnemies > currentEnemies && inWave)
@@ -90,6 +93,7 @@ public class SpawnerController : MonoBehaviour
         enemiesInWave *= 2;
         killedEnemies = 0;
         timeToWave = waveCooldown;
+        currentWave++;
         inWave = true;
     }
 }
