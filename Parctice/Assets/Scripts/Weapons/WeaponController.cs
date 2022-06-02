@@ -44,7 +44,7 @@ public class WeaponController : MonoBehaviour
             }
             
         }
-        if(Input.GetButtonDown("Reload") && ammo != magAmmo) StartCoroutine(Reload());
+        if(Input.GetButtonDown("Reload") && ammo != magAmmo && (infiniteAmmo || ammoInv.ammo[ammoType]  != 0)) StartCoroutine(Reload());
     }
 
     IEnumerator Reload() 

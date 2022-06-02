@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent;
     
     Transform player;
+    SpawnerController spawnContoll;
     
     public LayerMask playerLayerMask;
     public float attackCooldown;
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
 
     void Start() {
         player = GameObject.Find("PlayerPrefab").transform.GetChild(0);
+        spawnContoll = GameObject.Find("GameController").GetComponent<SpawnerController>();
     }
 
     void Update()
@@ -38,7 +40,7 @@ public class Enemy : MonoBehaviour
             agent.SetDestination(player.position);
 
         if (hp <= 0){
-            Destroy(gameObject);
+            Death();
         }
     }
 
@@ -49,13 +51,19 @@ public class Enemy : MonoBehaviour
 
     IEnumerator AttackPlayer()
     {
-        if (Physics.CheckSphere(transform.position + transform.forward, 1f, playerLayerMask))
-        {
-            attacking = true;
-            player.parent.gameObject.GetComponent<PlayerMovement>().GetDamage(damage);
-            Debug.Log(player.parent.gameObject.GetComponent<PlayerMovement>().hp);
-            yield return new WaitForSeconds(attackCooldown);
-            attacking = false;
-        }
+        
+        attacking = true;
+        player.gameObject.GetComponent<PlayerMovement>().GetDamage(damage);
+        Debug.Log(player.gameObject.GetComponent<PlayerMovement>().hp);
+        yield return new WaitForSeconds(attackCooldown);
+        attacking = false;
+        
+    }
+
+    void Death()
+    {
+        spawnContoll.MinusCurEnemy();
+        spawnContoll.AddKilledEnemy();
+        Destroy(gameObject);
     }
 }
