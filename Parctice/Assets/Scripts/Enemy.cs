@@ -10,10 +10,12 @@ public class Enemy : MonoBehaviour
     public int damage = 20;
     public int moneyForKill = 100;
     public NavMeshAgent agent;
-    
+
     Transform player;
     SpawnerController spawnContoll;
-    
+    //
+
+    //
     public LayerMask playerLayerMask;
     public float attackCooldown;
     bool moving;
@@ -76,5 +78,7 @@ public class Enemy : MonoBehaviour
         player.gameObject.GetComponent<PlayerMovement>().money += moneyForKill;
         // Debug.Log(player.gameObject.GetComponent<PlayerMovement>().money);
         Destroy(gameObject);
+        //        
+        player.gameObject.GetComponent<PlayerMovement>().killSum += 1;
     }
 }

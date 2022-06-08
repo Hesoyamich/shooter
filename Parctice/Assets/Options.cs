@@ -29,6 +29,8 @@ public class Options : MonoBehaviour
     }
 
     //Разрешение
+
+    /*
     Resolution[] rsl;
     List<string> resolutions;
     public Dropdown dropdown;
@@ -44,7 +46,7 @@ public class Options : MonoBehaviour
         dropdown.ClearOptions();
         dropdown.AddOptions(resolutions);
     }
-
+    */
     public void Resolution(int r)
     {
         if(r == 0)

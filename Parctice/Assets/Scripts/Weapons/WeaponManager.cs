@@ -23,9 +23,6 @@ public class WeaponManager : MonoBehaviour
         ammo.Add("Shotgun", 10);
         ammo.Add("Rocket", 100);
         ammo.Add("Sniper", 10);
-
-        //
-        AmmoValue(weapons[currentWeapon]);
     }
 
     void Update()
@@ -35,6 +32,8 @@ public class WeaponManager : MonoBehaviour
         if (Input.GetButtonDown("ThirdWeapon") && hasShotgun) ChooseWeapon(2);
         if (Input.GetButtonDown("FourthWeapon") && hasRocketLauncher) ChooseWeapon(3);
         if (Input.GetButtonDown("FifthWeapon") && hasSniperRifle) ChooseWeapon(4);
+        //
+        AmmoValue(weapons[currentWeapon]);
     }
 
     void ChooseWeapon(int number)
@@ -46,18 +45,19 @@ public class WeaponManager : MonoBehaviour
             {
                 SwitchWeapon(number);
             }
-        }else if (weapons[currentWeapon].GetComponent<RocketLauncherController>())
+        }
+        else if (weapons[currentWeapon].GetComponent<RocketLauncherController>())
         {
             RocketLauncherController curWeap = weapons[currentWeapon].GetComponent<RocketLauncherController>();
             if (!curWeap.GetReloadingState() && curWeap.GetShootingState()) 
             {
                 SwitchWeapon(number);
             }
-        }else 
+        }
+        else 
         {
             SwitchWeapon(number);
         }
-       
     }
 
     void SwitchWeapon(int number)
@@ -100,7 +100,6 @@ public class WeaponManager : MonoBehaviour
                 invAmmo.GetComponent<TextMeshProUGUI>().text = "inf";
             }
         }
-
         else if (currentWeapon == 3)
         {
             RocketLauncherController curWeap = weapon.GetComponent<RocketLauncherController>();

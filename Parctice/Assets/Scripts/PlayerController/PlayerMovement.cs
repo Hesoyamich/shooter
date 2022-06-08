@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -35,10 +36,16 @@ public class PlayerMovement : MonoBehaviour
     float verticalInput;
 
     //Арс
+    Transform player;
     public GameObject death_panel;
     public GameObject HP_UI;
     public GameObject Ammo_UI;
-    
+    public GameObject moneyText;
+    public GameObject waveStat;
+    public GameObject killStat;
+    public int killSum;
+    public int waveSum=1;
+
     //
 
     public int hp;
@@ -61,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         maxhp = hp;
+        money = 0;
         isAlive = true;
     }
 
@@ -77,13 +85,13 @@ public class PlayerMovement : MonoBehaviour
 
         //
         HP_UI.GetComponent<Slider>().value = hp;
+
         //
-       
+
 
         if (hp <= 0) KillPlayer();
 
-
-        if(grounded)
+        if (grounded)
             rb.drag = groundDrag;
         else
             rb.drag = 0;
@@ -100,6 +108,18 @@ public class PlayerMovement : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (money >= 100)
+            {
+                money -= 100;
+                HealPlayer(20);
+            }
+        }
+
+        moneyText.GetComponent<TextMeshProUGUI>().text = "$ " + money;
+        killStat.GetComponent<TextMeshProUGUI>().text = "Kills: " + killSum;
+        waveStat.GetComponent<TextMeshProUGUI>().text = "Wave: " + (waveSum+1);
         //
     }
 

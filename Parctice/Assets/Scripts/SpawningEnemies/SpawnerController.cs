@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class SpawnerController : MonoBehaviour
 {
-
     public Transform spawner;
-
+    //
+    PlayerMovement player;
+    //
     Transform[] spawners;
     public GameObject enemy;
     public int maxEnemies;
@@ -15,15 +16,17 @@ public class SpawnerController : MonoBehaviour
     int currentEnemies;
     public int waveCooldown;
     bool enemyIsSpawning;
-    
+
     public int maxWaves;
     int currentWave;
     bool inWave;
     int timeToWave;
     bool waveTimer;
+    bool changewave;
     // Start is called before the first frame update
     void Start()
     {
+        player = FindObjectOfType<PlayerMovement>();
         spawners = new Transform[spawner.childCount];
         int i = 0;
         timeToWave = waveCooldown;
@@ -47,12 +50,15 @@ public class SpawnerController : MonoBehaviour
             StartCoroutine(EnemySpawner());
 
         if (killedEnemies == enemiesInWave)
-            {
-                if (inWave) currentWave++;
-                inWave = false; 
-                
-            }
-
+        {
+            if (inWave) currentWave++;
+            inWave = false; 
+            
+        }
+        if (timeToWave == 0)
+        {
+            NewWave();
+        }
     }
 
     void CreateEnemy(Transform spawn)
@@ -84,19 +90,24 @@ public class SpawnerController : MonoBehaviour
     IEnumerator StartWaveCooldown()
     {
         waveTimer = true;
-        yield return new WaitForSeconds(1f);
         Debug.Log(timeToWave);
         timeToWave--;
         waveTimer = false;
-        if (timeToWave == 0)
-            NewWave();
+        changewave = true;
+        yield return new WaitForSeconds(1f);
     }
-
+    
     void NewWave()
     {
-        enemiesInWave *= 2;
-        killedEnemies = 0;
-        timeToWave = waveCooldown;
-        inWave = true;
+        if (changewave)
+        {
+            enemiesInWave *= 2;
+            killedEnemies = 0;
+            timeToWave = waveCooldown;
+            inWave = true;
+            player.waveSum += 1;
+            changewave = false;
+        }
+
     }
 }

@@ -38,7 +38,8 @@ public class WeaponBuyingSystem : MonoBehaviour
                 player.transform.GetChild(0).gameObject.GetComponent<PlayerMovement>().money -= weaponPrice;
                 playerInventory.SetWeaponActive(weaponType);
             }
-        } else 
+        }
+        else 
         {
             if (player.transform.GetChild(0).gameObject.GetComponent<PlayerMovement>().money >= ammoPrice)
             {
